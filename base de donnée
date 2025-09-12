@@ -1,0 +1,20 @@
+
+CREATE DATABASE IF NOT EXISTS chat CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE chat;
+
+CREATE TABLE utilisateur (
+    id INT AUTO_INCREMENT PRIMARY KEY,     
+    nom VARCHAR(100) NOT NULL,              
+    prenom VARCHAR(100) NOT NULL,           
+    email VARCHAR(255) NOT NULL UNIQUE,     
+    mot_de_passe VARCHAR(255) NOT NULL      
+);
+
+
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,         
+    utilisateur_id INT NOT NULL,               
+    message TEXT NOT NULL,                     
+    date_envoi DATETIME DEFAULT CURRENT_TIMESTAMP,  
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
+);
