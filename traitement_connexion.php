@@ -9,7 +9,7 @@ if (empty($email) || empty($mot_de_passe)) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT id, mot_de_passe, nom, prenom FROM utilisateur WHERE email = ?");
+$stmt = $conn->prepare("SELECT id, mot_de_passe, nom, prenom FROM utilisateurs WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $res = $stmt->get_result();

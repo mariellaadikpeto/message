@@ -1,31 +1,19 @@
 <?php
-// config.php
+// Session sécurisée
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Démarrage sécurisé de la session
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '/',
-    'domain' => '',
-    'secure' => false,   // ⚠️ mettre true si HTTPS
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-session_start();
-
-// Fonction pour vérifier la connexion
+// Vérifie si utilisateur connecté
 function verifierConnexion() {
-    if (!isset($_SESSION['utilisateur_id'])) {
+    if (!isset($_SESSION['user_id'])) {
         header("Location: connexion.php");
-        exit;
+        exit();
     }
 }
 
-// Connexion à la base de données
-$conn = new mysqli("localhost", "root", "", "chat");
-if ($conn->connect_error) {
-    die("Erreur connexion BDD: " . $conn->connect_error);
-}
-
-// Forcer utf8mb4
+// Connexion BDD
+$conn = new mysqli("localhost", "root", "", "messagerie_db");
+if ($conn->connect_error) die("Erreur BDD: ".$conn->connect_error);
 $conn->set_charset("utf8mb4");
 ?>

@@ -23,25 +23,9 @@
         }
         h2 { font-weight: 700; color: #333; margin-bottom: 30px; text-align: center; }
         label { font-weight: 600; color: #555; }
-        .form-control {
-            border-radius: 8px;
-            padding: 12px 15px;
-            font-size: 16px;
-            border: 1.5px solid #ddd;
-        }
-        .form-control:focus {
-            border-color: #2575fc;
-            box-shadow: 0 0 8px rgba(37,117,252,0.3);
-        }
-        button.btn-primary {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 18px;
-            background: #2575fc;
-            border: none;
-        }
+        .form-control { border-radius: 8px; padding: 12px 15px; font-size: 16px; border: 1.5px solid #ddd; }
+        .form-control:focus { border-color: #2575fc; box-shadow: 0 0 8px rgba(37,117,252,0.3); }
+        button.btn-primary { width: 100%; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 18px; background: #2575fc; border: none; }
         button.btn-primary:hover { background: #185ecc; }
         p.text-center { margin-top: 20px; font-size: 14px; color: #666; text-align: center; }
         p.text-center a { color: #2575fc; font-weight: 600; text-decoration: none; }

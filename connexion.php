@@ -1,13 +1,13 @@
 <?php
 session_start();
+include("config.php");
 
 // Si l'utilisateur est déjà connecté, redirige vers le dashboard
-if (isset($_SESSION['utilisateur_id'])) {
+if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,7 +31,12 @@ if (isset($_SESSION['utilisateur_id'])) {
             width: 100%;
             max-width: 400px;
         }
-        h2 { font-weight: 700; color: #333; margin-bottom: 30px; text-align: center; }
+        h2 { 
+            font-weight: 700; 
+            color: #333; 
+            margin-bottom: 30px; 
+            text-align: center; 
+        }
         #message { margin-top: 20px; }
     </style>
 </head>
@@ -53,30 +58,32 @@ if (isset($_SESSION['utilisateur_id'])) {
         </form>
     </div>
 
-    <script>
-        document.getElementById('formConnexion').addEventListener('submit', function(e) {
-            e.preventDefault();
+<script>
+document.getElementById('formConnexion').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            const formData = new FormData();
-            formData.append("email", document.getElementById("email").value);
-            formData.append("mot_de_passe", document.getElementById("mot_de_passe").value);
+    const formData = new FormData();
+    formData.append("email", document.getElementById("email").value);
+    formData.append("mot_de_passe", document.getElementById("mot_de_passe").value);
 
-            fetch("traitement_connexion.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.text())
-            .then(data => {
-                if (data.includes("success")) {
-                    window.location.href = "dashboard.php"; // redirige vers la page d'accueil après connexion
-                } else {
-                    document.getElementById("message").innerHTML = data;
-                }
-            })
-            .catch(() => {
-                document.getElementById("message").innerHTML = '<div class="alert alert-danger mt-3">Erreur réseau.</div>';
-            });
-        });
-    </script>
+    fetch("traitement_connexion.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data.includes("success")) {
+            // 🔥 Redirection vers le dashboard après connexion
+            window.location.href = "dashboard.php"; 
+        } else {
+            document.getElementById("message").innerHTML = data;
+        }
+    })
+    .catch(() => {
+        document.getElementById("message").innerHTML = 
+            '<div class="alert alert-danger mt-3">Erreur réseau.</div>';
+    });
+});
+</script>
 </body>
 </html>

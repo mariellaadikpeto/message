@@ -20,7 +20,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Vérifie si l'email existe déjà
-$check = $conn->prepare("SELECT id FROM utilisateur WHERE email = ?");
+$check = $conn->prepare("SELECT id FROM utilisateurs WHERE email = ?");
 $check->bind_param("s", $email);
 $check->execute();
 $check->store_result();
@@ -35,8 +35,8 @@ $check->close();
 // Hachage du mot de passe
 $mot_de_passe_hache = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-// Insertion dans la table utilisateur
-$stmt = $conn->prepare("INSERT INTO utilisateur (nom, prenom, email, mot_de_passe) VALUES (?, ?, ?, ?)");
+// Insertion dans la table utilisateurs
+$stmt = $conn->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $nom, $prenom, $email, $mot_de_passe_hache);
 
 if ($stmt->execute()) {
@@ -47,3 +47,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+?>
